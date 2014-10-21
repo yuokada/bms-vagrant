@@ -7,6 +7,16 @@ task :knife do
   sh "bundle exec knife cookbook test cookbook -c test/.chef/knife.rb  -o #{sandbox_path}/../"
 end
 
+desc 'foodcritic'
+task :foodcritic do |t|
+  if Gem::Version.new( '1.9.3' ) <= Gem::Version.new( RUBY_VERSION.dup )
+    # "FC008: Generated cookbook metadata needs updating" is for handson
+    sh "foodcritic -f any #{File.dirname( __FILE__ )}"
+  else
+    puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 1.9.2."
+  end
+end
+
 task :prepare_sandbox do
   files = %w{*.md *.rb attributes definitions files libraries providers recipes resources templates}
 

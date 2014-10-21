@@ -6,6 +6,6 @@ rvm:
 script:
 #- bundle exec berks install
  - bundle exec rake knife
- - bundle exec rake rspec
+#- bundle exec rake rspec
  - bundle exec rake foodcritic
 
